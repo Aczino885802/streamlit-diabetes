@@ -2,7 +2,7 @@
 
 ## Descripción
 
-Aplicación web interactiva desarrollada en Python con Streamlit y Plotly para explorar los indicadores de salud relacionados con la diabetes en la población adulta de Estados Unidos. Permite filtrar por condición diabética actualizando todas las visualizaciones en tiempo real.
+Aplicación web interactiva desarrollada en Python con Streamlit y Plotly para explorar los indicadores de salud relacionados con la diabetes en la población adulta de Estados Unidos. Permite filtrar por condición diabética actualizando todas las visualizaciones en tiempo real, e incluye un bloque de **Hallazgos** debajo de cada gráfico que se recalcula dinámicamente según la selección del usuario.
 
 **Proyecto 2 — Herramientas y Visualización de Datos**
 Fundación Universitaria Los Libertadores
@@ -20,29 +20,31 @@ Fundación Universitaria Los Libertadores
 
 ## Hallazgos Principales
 
-1. **Subdiagnóstico de prediabetes:** Solo el 1.8% de los encuestados reporta prediabetes, lo que sugiere un alto nivel de subdiagnóstico en la población general estadounidense.
+1. **Acceso a salud condicionado por ingreso:** En el nivel de ingreso más bajo (<$10k), el 30.4% de las personas no fue al médico por costo, mientras que en el nivel más alto (>$75k) solo el 4% reporta esta barrera. Aunque la cobertura de seguro es alta en todos los niveles (76% a 96%), tener seguro no equivale a poder pagar la atención. Este patrón ayuda a explicar el subdiagnóstico de prediabetes en la población vulnerable.
 
-2. **BMI como factor de riesgo central:** La mediana del IMC en personas con diabetes (~31) es significativamente mayor que en personas sin diabetes (~27), confirmando la obesidad como factor de riesgo principal.
+2. **BMI como factor de riesgo central:** La mediana del IMC en personas con diabetes (~31, zona de obesidad según OMS) es significativamente mayor que en personas sin diabetes (~27, zona de sobrepeso). El histograma con cortes clínicos confirma que la distribución del peso se desplaza progresivamente hacia la derecha en los grupos con condición más severa.
 
-3. **Hipertensión como comorbilidad dominante:** El 75.3% de las personas con diabetes también presenta hipertensión, frente al 37.1% en personas sin diabetes.
+3. **Hipertensión como comorbilidad dominante:** El 75.3% de las personas con diabetes también presenta hipertensión, frente al 37.1% en personas sin diabetes. La actividad física muestra el patrón inverso: 77.9% en sin diabetes vs 63.1% en diabetes. La diabetes no aparece aislada — viene acompañada de un paquete de comorbilidades cardiometabólicas.
 
-4. **Prevalencia creciente con la edad:** La proporción de personas con diabetes aumenta sostenidamente con la edad. A partir del grupo 60–64 años, los casos superan el 25% de los encuestados en ese rango.
+4. **Prevalencia creciente con la edad:** La proporción de personas con diabetes aumenta sostenidamente con la edad. Entre los 50 y los 70 años la prevalencia casi se duplica, lo que define una franja crítica para programas de tamizaje preventivo.
 
-5. **Correlaciones clave:** Diabetes correlaciona principalmente con salud general percibida (0.30), hipertensión (0.27) y BMI (0.22). La actividad física muestra correlación negativa consistente (−0.12).
+5. **Correlaciones clave:** Diabetes correlaciona principalmente con salud general percibida (0.30), hipertensión (0.27) y BMI (0.22). La actividad física muestra correlación negativa consistente (−0.12). Ningún factor por sí solo explica la diabetes — es el resultado de múltiples variables interconectadas.
 
 ---
 
 ## Visualizaciones Implementadas
 
-1. **Gráfico de barras comparativo** — Distribución de encuestados por condición diabética con conteos absolutos y porcentajes, recalculados en tiempo real al aplicar filtros.
+1. **Acceso a salud por ingreso (barras + línea)** — Cobertura de seguro de salud (`AnyHealthcare`) por nivel de ingreso cruzada con el porcentaje de personas que no fueron al médico por costo (`NoDocbcCost`). Revela la barrera económica al acceso médico real.
 
-2. **Diagrama de caja (boxplot)** — Distribución del IMC por grupo con mediana, rango intercuartílico, bigotes (1.5×IQR) y media calculados desde el CSV.
+2. **Distribución del BMI con cortes OMS (histograma superpuesto)** — Distribución del IMC por condición diabética con líneas verticales que marcan los puntos de corte clínicos de la OMS: 25 (sobrepeso) y 30 (obesidad). Permite interpretar el peso en contexto clínico, no solo estadístico.
 
-3. **Barras agrupadas** — Prevalencia de 5 factores de riesgo (hipertensión, colesterol, tabaquismo, actividad física, enfermedad cardíaca) por condición diabética.
+3. **Perfil de factores de riesgo (radar)** — Prevalencia de 5 factores de riesgo (hipertensión, colesterol, tabaquismo, actividad física, enfermedad cardíaca) representada como polígono cerrado por condición diabética. Muestra el "perfil completo" de cada grupo en una sola figura.
 
-4. **Barras apiladas al 100%** — Composición de la condición diabética según 13 grupos de edad, mostrando la evolución de la prevalencia a lo largo del ciclo de vida.
+4. **Prevalencia por edad (mapa de calor)** — Porcentaje de cada condición diabética en 13 grupos etarios. La intensidad de color comunica el patrón de envejecimiento sin necesidad de leer todos los números.
 
-5. **Mapa de calor (heatmap)** — Matriz de correlación de Pearson entre 9 indicadores de salud con paleta divergente rojo–blanco–azul.
+5. **Mapa de correlaciones (heatmap)** — Matriz de correlación de Pearson entre 9 indicadores de salud con paleta divergente rojo–blanco–azul (escala −1 a 1).
+
+Cada visualización incluye un bloque de **Hallazgos** dinámico que se actualiza según los filtros seleccionados, calculando porcentajes, medianas y ratios directamente desde el CSV.
 
 ---
 
@@ -93,8 +95,8 @@ Desplegado en **Streamlit Community Cloud** desde la rama `main`.
 
 ## Autores
 
-- Carlos Muñoz
-- [Juan Camilo]
+- Carlos Andrés Muñoz Arias
+- Juan Camilo Girata Arango
 
 **Curso:** Herramientas y Visualización de Datos
 **Institución:** Fundación Universitaria Los Libertadores
